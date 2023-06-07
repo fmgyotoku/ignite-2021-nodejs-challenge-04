@@ -18,7 +18,13 @@
   "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
   "rules": {
     "camelcase": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error", 
+      { 
+        "semi": false, 
+        "trailingComma": "none" 
+      } 
+    ],
     "import/no-unresolved": "error",
     "@typescript-eslint/naming-convention": [
       "error",
@@ -57,7 +63,9 @@
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": ["**/*.spec.ts"] }
-    ]
+    ], 
+    "semi": ["error", "never"], 
+    "comma-dangle": ["error", "never"]
   },
   "settings": {
     "import/resolver": {
