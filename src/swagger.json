@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger Challenge",
+    "description": "This is an API to handle user management",
+    "version": "1.0.0",
+    "contact": {
+      "email": "test@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "John Citizen",
+                  "email": "user@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object", 
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }, 
+                    "email": {
+                      "type": "string"
+                    }, 
+                    "admin": {
+                      "type": "boolean"
+                    }, 
+                    "created_at": {
+                      "type": "string", 
+                      "format": "date"
+                    }, 
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email already exists"
+          }
+        }
+      }, 
+      "get": {
+        "tags": ["User"], 
+        "summary": "List users", 
+        "description": "Retrieve a list of users", 
+        "parameters": [{
+          "name": "user_id",
+          "in": "header",
+          "required": true, 
+          "schema": {
+            "type": "string", 
+            "example": "40465884-1d62-4848-b6dc-98ae6112e7e5"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Success", 
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array", 
+                  "items": {
+                    "type": "object", 
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }, 
+                      "email": {
+                        "type": "string"
+                      }, 
+                      "admin": {
+                        "type": "boolean"
+                      }, 
+                      "created_at": {
+                        "type": "string", 
+                        "format": "date"
+                      }, 
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }, 
+          "400": {
+            "description": "User does not exist or User is not admin"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"], 
+        "summary": "Get user", 
+        "description": "Retrieve a specific users", 
+        "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true, 
+          "schema": {
+            "type": "string", 
+            "example": "40465884-1d62-4848-b6dc-98ae6112e7e5"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Success", 
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object", 
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }, 
+                    "email": {
+                      "type": "string"
+                    }, 
+                    "admin": {
+                      "type": "boolean"
+                    }, 
+                    "created_at": {
+                      "type": "string", 
+                      "format": "date"
+                    }, 
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          }, 
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["User"], 
+        "summary": "Turn user admin", 
+        "description": "Update user with admin rights", 
+        "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true, 
+          "schema": {
+            "type": "string", 
+            "example": "40465884-1d62-4848-b6dc-98ae6112e7e5"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Success", 
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object", 
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }, 
+                    "email": {
+                      "type": "string"
+                    }, 
+                    "admin": {
+                      "type": "boolean"
+                    }, 
+                    "created_at": {
+                      "type": "string", 
+                      "format": "date"
+                    }, 
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  }
+}
